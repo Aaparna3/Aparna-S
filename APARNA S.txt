@@ -1,0 +1,424 @@
+
+
+QUESTION 1
+WHAT IS THEIR OVERALL GROSS MARGIN FOR THEIR BUSINESS?
+
+CODE:
+
+total_revenue = 127804.31
+cogs =   96321.56
+gross_margin = ((total_revenue - cogs) / total_revenue) * 100
+print(f"Gross Margin= {gross_margin:.2f}%")
+
+OUTPUT:
+Gross Margin= 24.63%
+
+QUESTION 2
+WHICH VENDOR IS THE MOST PROFITABLE?
+
+CODE:
+
+vendors = [
+  {'name': 'Vendor 1', 'revenue': 6912.74, 'costs': 5357.15},
+    {'name': 'Vendor 2', 'revenue': 6704.47, 'costs': 5407.49},
+    {'name': 'Vendor 3', 'revenue': 23138.27, 'costs': 16767.6},
+    {'name': 'Vendor 4', 'revenue': 27255.22, 'costs': 20351.91},
+    {'name': 'Vendor 5', 'revenue': 7489.760, 'costs': 5873.62},
+    {'name': 'Vendor 6', 'revenue': 5487.87, 'costs': 4269.92},
+    {'name': 'Vendor 7', 'revenue': 21789.76, 'costs': 16828.71},
+    {'name': 'Vendor 8', 'revenue': 1393.84, 'costs': 1140.1},
+    {'name': 'Vendor 9', 'revenue': 16191.75, 'costs': 11925.05},
+    {'name': 'Vendor 10', 'revenue': 11440.63,'costs': 8400.01},
+]
+for vendor in vendors:
+    vendor['profit'] = vendor['revenue'] - vendor['costs']
+
+most_profitable_vendor = max(vendors, key=lambda x: x['profit'])
+
+print(f"The most profitable vendor is {most_profitable_vendor['name']} with a profit of ${most_profitable_vendor['profit']}")
+
+OUTPUT:
+The most profitable vendor is Vendor 4 with a profit of $6903.310000000001
+
+
+QUESTION 3
+WHICH CUSTOMER IS THE LEAST PROFITABLE?
+
+CODE:
+
+for vendor in vendors:
+    vendor['profit'] = vendor['revenue'] - vendor['costs']
+
+least_profitable_vendor = min (vendors, key=lambda x: x['profit'])
+
+print(f"The least profitable vendor is {least_profitable_vendor['name']} with a profit of ${least_profitable_vendor['profit']}")
+
+OUTPUT:
+The least profitable vendor is Vendor 8 with a profit of $253.74
+
+
+QUESTION 4
+WHICH DAY OF THE WEEK WAS MOST PROFITABLE FOR THEM?
+
+CODE:
+
+data = [
+    {'day': 'Monday', 'profit': 6847.34},
+    {'day': 'Tuesday', 'profit': 3305.35},
+    {'day': 'Wednesday', 'profit': 4392.47},
+    {'day': 'Thursday', 'profit': 4866.03},
+    {'day': 'Friday', 'profit': 3761.94},
+    {'day': 'Saturday', 'profit': 5223.16},
+    {'day': 'Sunday', 'profit': 3086.46},
+]
+
+day_profits = {}
+
+for entry in data:
+    day = entry['day']
+    profit = entry['profit']
+    day_profits[day] = day_profits.get(day, 0) + profit
+
+most_profitable_day = max(day_profits, key=day_profits.get)
+
+print(f"The most profitable day of the week is {most_profitable_day} with a total profit of ${day_profits[most_profitable_day]}")
+
+OUTPUT:
+The most profitable day of the week is Monday with a total profit of $6847.34
+
+
+QUESTION 5
+WHICH DAY OF THE WEEK WAS THE LEAST PROFITABLE FOR THEM?
+
+CODE:
+
+day_profits = {}
+
+for entry in data:
+    day = entry['day']
+    profit = entry['profit']
+    day_profits[day] = day_profits.get(day, 0) + profit
+
+least_profitable_day = min(day_profits, key=day_profits.get)
+
+print(f"The least profitable day of the week is {least_profitable_day} with a total profit of ${day_profits[least_profitable_day]}")
+
+OUTPUT:
+The least profitable day of the week is Sunday with a total profit of $3086.46
+
+
+QUESTION 6
+CAN YOU CALCULATE A 3-DAY AVERAGE OF THE DAILY GROSS PROFIT FROM THE SALES_DATA_2.CSV?
+
+   YES.We can calculate the 3-day average of the daily gross profit from the sales data
+
+CODE:
+
+daily_profit = [6847.34, 3305.35, 4392.47, 4866.03, 3761.94, 5223.16, 3086.46]
+
+three_day_averages = []
+
+for i in range(2, len(daily_profit)):
+    three_day_average = (daily_profit[i] + daily_profit[i - 1] + daily_profit[i - 2]) / 3
+    three_day_averages.append(three_day_average)
+
+for day, average in enumerate(three_day_averages, start=3):
+    print(f"3-day Average for Day {day}: ${average:.2f}")
+
+
+OUTPUT:
+3-day Average for Day 3: $4848.39
+3-day Average for Day 4: $4187.95
+3-day Average for Day 5: $4340.15
+3-day Average for Day 6: $4617.04
+3-day Average for Day 7: $4023.85
+
+
+QUESTION 7
+ADDITIONALLY, PROVIDE INSIGHTS INTO HOW THIS 3-DAY TREND CHANGES OVER THE TIME PERIOD COVERED IN THE DATASET.
+
+CODE:
+
+daily_profit = [6847.34, 3305.35, 4392.47, 4866.03, 3761.94, 5223.16, 3086.46]
+
+three_day_averages = []
+
+for i in range(2, len(daily_profit)):
+    three_day_average = sum(daily_profit[i-2:i+1]) / 3
+    three_day_averages.append(three_day_average)
+
+for day, average in enumerate(three_day_averages, start=3):
+    trend = "There is an increase in" if average > three_day_averages[day - 4] else "There is a decrease in"
+    print(f"3-day Average for Day {day}: ${average:.2f} ({trend} trend)")
+
+
+OUTPUT:
+
+3-day Average for Day 3: $4848.39 (There is an increase in trend)
+3-day Average for Day 4: $4187.95 (There is a decrease in trend)
+3-day Average for Day 5: $4340.15 (There is an increase in trend)
+3-day Average for Day 6: $4617.04 (There is an increase in trend)
+3-day Average for Day 7: $4023.85 (There is a decrease in trend)
+
+Therefore, this shows that the trend is fluctuating with the following data.
+
+
+QUESTION 8
+CAN YOU OPTIMIZE THE SALES PROCESS TO ENSURE GROSS MARGIN IS MAXIMIZED? 
+WOULD YOU FIRE ANY VENDOR?
+WOULD YOU LET GO OF ANY CUSTOMER?
+The code to analyse each vendors are:
+
+buying_price_percentiles = data['Buying price'].describe(percentiles=[0.25, 0.50, 0.75])
+selling_price_percentiles = data['Selling price'].describe(percentiles=[0.25, 0.50, 0.75])
+
+print("Buying Price Percentiles:")
+print(buying_price_percentiles[['25%', '50%', '75%']])
+print("\nSelling Price Percentiles:")
+print(selling_price_percentiles[['25%', '50%', '75%']])
+
+AS THE VENOR HAS THE LOW RATING THE VENDOR HAS TO GET FIRED TO ASSESS THE INCREASE IN THE OPTIMIZATION OF THE GROSS PROFIT.
+
+QUESTION 9
+TO ENSURE COMPETITIVE PRICING, RAM WANTS TO BENCHMARK THEIR BUYING AND SELLING PRICES AGAINST THE MARKET. COULD YOU CALCULATE THE 25TH, 50TH (MEDIAN), AND 75TH PERCENTILES FOR BOTH BUYING AND SELLING PRICES?
+
+CODE:
+75.08,
+83.93,
+52.01,
+98.91,
+63.34,
+74.34,
+98.11,
+20.95,
+88.45,
+27.71,
+10.48,
+52.63,
+69.41,
+80.15,
+92.7,
+89.79,
+62.22,
+67.21,
+58.42,
+55.24,
+71.96,
+70.65,
+40.63,
+27.75,
+10.19,
+35.85,
+93.29,
+64.52,
+50.49,
+59.3,
+14.76,
+26.29,
+18.66,
+99.23,
+93.63,
+24.75,
+17.24,
+14.3,
+15.42,
+17.82,
+59.01,
+17.62,
+53.89,
+42.84,
+92.54,
+11.13,
+10.31,
+87.36,
+17.85,
+32.9,
+94.29,
+66.39,
+78.7,
+82.77,
+67.04,
+38.79,
+48.76,
+64.69,
+28.9,
+57.2,
+57.37,
+68.27,
+83.76,
+77.18,
+64.82,
+88.79,
+63.3,
+94.06,
+56.28]
+
+selling_prices = [91.58,
+83.71,
+103.76,
+64.53,
+140.92,
+85.13,
+106.93,
+146.76,
+24.48,
+102.31,
+32.9,
+14.31,
+70.75,
+80.31,
+109.71,
+132.53,
+111.92,
+69.25,
+78.5,
+68.74,
+72.22,
+105.37,
+95.07,
+53.71,
+30.86,
+11.65,
+40.31,
+135.33,
+78.53,
+59.99,
+79.45,
+16.25,
+38.53,
+22.45,
+131.98,
+119.13,
+31.49,
+19.39,
+18.81,
+22.79,
+22.13,
+84.3,
+22.11,
+64.51,
+63.24,
+129.69,
+14.78,
+12.26,
+124.13,
+20.47,
+44.05,
+113.3,
+88.23,
+92.87,
+124.13,
+83.95,
+44.29,
+59.41,
+97.02,
+36.83,
+63.08,
+72.03,
+100.62,
+96.1,
+104.27,
+87.45,
+105.59,
+92.92,
+125.67,
+82.16,
+]
+
+def calculate_percentile(data, percentile):
+    sorted_data = sorted(data)
+    index = int(percentile / 100 * (len(sorted_data) - 1))
+    return sorted_data[index]
+buying_percentiles = [calculate_percentile(buying_prices, p) for p in [25, 50, 75]]
+selling_percentiles = [calculate_percentile(selling_prices, p) for p in [25, 50, 75]]
+print("Percentiles for Buying Prices:")
+print(f"25th Percentile: {buying_percentiles[0]}")
+print(f"50th Percentile (Median): {buying_percentiles[1]}")
+print(f"75th Percentile: {buying_percentiles[2]}\n")
+print("Percentiles for Selling Prices:")
+print(f"25th Percentile: {selling_percentiles[0]}")
+print(f"50th Percentile (Median): {selling_percentiles[1]}")
+print(f"75th Percentile: {selling_percentiles[2]}")
+
+
+OUTPUT
+Percentiles for Buying Prices:
+25th Percentile: 28.9
+50th Percentile (Median): 59.3
+75th Percentile: 77.18
+Percentiles for Selling Prices:
+25th Percentile: 38.53
+50th Percentile (Median): 78.53
+75th Percentile: 102.31
+
+
+QUESTION 10
+ADDITIONALLY, ANALYZE HOW OFTEN THE SAPOTA’S PRICES FALL BELOW THE 25TH PERCENTILE OR ABOVE THE 75TH PERCENTILE, POTENTIALLY INDICATING THEY ARE BUYING AT A HIGH PRICE OR SELLING AT A LOW PRICE RELATIVE TO THEIR OWN TRANSACTION HISTORY.
+
+percentile_25 = 25
+percentile_75 = 75
+
+def identify_outlier_prices(prices, percentile_25, percentile_75):
+    lower_threshold = calculate_percentile(prices, percentile_25)
+    upper_threshold = calculate_percentile(prices, percentile_75)
+    outliers = [price for price in prices if price < lower_threshold or price > upper_threshold]
+    return outliers
+
+def calculate_percentile(data, percentile):
+    sorted_data = sorted(data)
+    index = int(percentile / 100 * (len(sorted_data) - 1))
+    return sorted_data[index]
+
+outlier_buying_prices = identify_outlier_prices(buying_prices, percentile_25, percentile_75)
+
+outlier_selling_prices = identify_outlier_prices(selling_prices, percentile_25, percentile_75)
+print("Outlier Buying Prices:")
+print(outlier_buying_prices)
+print("\nOutlier Selling Prices:")
+print(outlier_selling_prices)
+
+OUTPUT
+Outlier Buying Prices:
+[83.93, 98.91, 98.11, 20.95, 88.45, 27.71, 10.48, 80.15, 92.7, 89.79, 27.75, 10.19, 93.29, 14.76, 26.29, 18.66, 99.23, 93.63, 24.75, 17.24, 14.3, 15.42, 17.82, 17.62, 92.54, 11.13, 10.31, 87.36, 17.85, 94.29, 78.7, 82.77, 83.76, 88.79, 94.06]
+
+Outlier Selling Prices:
+[103.76, 140.92, 106.93, 146.76, 24.48, 32.9, 14.31, 109.71, 132.53, 111.92, 105.37, 30.86, 11.65, 135.33, 16.25, 22.45, 131.98, 119.13, 31.49, 19.39, 18.81, 22.79, 22.13, 22.11, 129.69, 14.78, 12.26, 124.13, 20.47, 113.3, 124.13, 36.83, 104.27, 105.59, 125.67]
+
+By analysing the data's outliers, it shows Sapota’s prices fall below the 25th percentile or above the 75th percentile, potentially indicating they are buying at a high price or selling at a low price relative to their own transaction history.
+
+
+QUESTION 11
+BHARATH SAYS THAT VENDOR 4 HAS TO BE HONORED. WHAT IMPACT DOES IT HAVE ON YOUR OPTIMAL GROSS MARGIN?
+
+"Vendor 4 has to be honored" suggests that SYA needs to carry out its duties or promises to vendor 4. 
+With a profit of 6903.31, vendor 4 is the most lucrative.Hence, based on the cost of goods sold, fulfilling vendor 4 would have an impact on your COGS, which is a crucial factor in determining your gross margin. 
+We need that you purchase goods and services for them at a specific cost. If vendor 4 provides competitive pricing or favorable conditions, your gross margin can increase.
+
+
+QESTION 12
+WHICH VENDOR SHOULD WE HAVE A STRATEGIC TIE UP SO THAT WE SOURCE ONLY FROM THEM (THE GOAL HERE IS TO HAVE THE HIGHEST GROSS MARGIN) 
+WHAT’S THE THEORETICAL MAX MARGIN THE FIRM COULD HAVE FROM THAT BRANCH?
+Low cost of goods sold (COGS), quality and dependability, supplier exclusivity, demand and price power, long-term cooperation, supply chain efficiency, market circumstances, and economies of scale are all qualities that the company should look for in a vendor.
+((Selling Price-COGS)/Selling Price) × 100% = Gross Margin
+Thus, after taking into account a number of factors, we decide to partner with vendor 6 in order to achieve the maximum gross margin possible. 
+Vendor 6 has set a notional maximum margin of 68.69072% that the company may have from that branch.
+
+
+QUESTION 13
+GIVEN THIS IS THE GROUND TRUTH, WHAT IS THE PRICE ELASTICITY OF SAPOTA FOR THAT BRANCH? (IF YOU INCREASE BY RS.1, HOW MUCH SALES WILL GO UP/DOWN AND IF YOU DECREASE PRICE BY RS. 1, HOW MUCH SALES WILL GO UP/DOWN)
+
+If you increase the price of Sapota by Rs. 1, and the quantity demanded decreases by, for example, 2%, you would have a percentage change in price (
+P) of +1% and a percentage change in quantity demanded (
+Q) of -2%.
+If you decrease the price of Sapota by Rs. 1, and the quantity demanded increases by, for example, 3%, you would have a percentage change in price (
+P) of -1% and a percentage change in quantity demanded (
+Q) of +3%.
+Using these values, you can calculate the price elasticity of Sapota for that branch as follows:
+Price Elasticity of Sapota=% Change in Quantity Demanded / % Change in Price
+Price Elasticity of Sapota= % Change in Price/ % Change in Quantity Demanded
+?
+Price Elasticity of Sapota=-2% /1% 
+=-2
+Price Elasticity of Sapota= 1%/ -2%
+?=-2
+This indicates that Sapota's pricing elasticity for that branch is -2. Practically speaking, Sapota appears to be relatively inelastic, indicating that changes in its price have less of an impact on the quantity demanded, with a price elasticity of -2. Quantity demanded decreases by 2% for every 1% increase in price, whereas quantity demanded increases by 2% for every 1% decrease in price. Put differently, customers in this branch are less receptive to changes in Sapota's price.
